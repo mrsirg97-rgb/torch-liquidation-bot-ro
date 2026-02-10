@@ -9,20 +9,20 @@ importers:
   packages/bot:
     dependencies:
       '@solana/web3.js':
-        specifier: ^1.98.4
+        specifier: 1.98.4
         version: 1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
       torchsdk:
-        specifier: ^1.0.5
-        version: 1.0.5(@solana/web3.js@1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10)
+        specifier: 1.0.7
+        version: 1.0.7(@solana/web3.js@1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10)
     devDependencies:
       '@types/node':
-        specifier: ^20
+        specifier: 20.19.33
         version: 20.19.33
       prettier:
-        specifier: ^3.5.3
+        specifier: 3.8.1
         version: 3.8.1
       typescript:
-        specifier: ^5
+        specifier: 5.9.3
         version: 5.9.3
 
 packages:
@@ -324,8 +324,8 @@ packages:
   toml@3.0.0:
     resolution: {integrity: sha512-y/mWCZinnvxjTKYhJ+pYxwD0mRLVvOtdS2Awbgxln6iEnt4rk0yBxeSBHkGJcPucRiG0e55mwWp+g/05rsrd6w==}
 
-  torchsdk@1.0.5:
-    resolution: {integrity: sha512-pnmcUXxP3MBrbmDTW/srOUch/UeI1n/j+LYBSccSFzYQl6dWJZWmzIwLOuABbf7453UDJXIecRjtyitdNyjXJA==}
+  torchsdk@1.0.7:
+    resolution: {integrity: sha512-JPL3XIU/mA4tqbCXHDjen3ADRWmxmU5P4u5bp8KvsI9FudcU8E90GS3aMB7GqA6SR8JiLjHWRJQ0DxkbfsWNUg==}
     peerDependencies:
       '@solana/web3.js': ^1.98.0
 
@@ -743,7 +743,7 @@ snapshots:
 
   toml@3.0.0: {}
 
-  torchsdk@1.0.5(@solana/web3.js@1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10):
+  torchsdk@1.0.7(@solana/web3.js@1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10):
     dependencies:
       '@coral-xyz/anchor': 0.32.1(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@solana/spl-token': 0.4.14(@solana/web3.js@1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10)

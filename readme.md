@@ -1,4 +1,4 @@
-# torch-liquidation-bot v2.0.5 (Read-Only)
+# torch-liquidation-bot v2.0.6 (Read-Only)
 
 Read-only lending market scanner for [Torch Market](https://torch.market) on Solana. No wallet required. Only an RPC endpoint is needed.
 
@@ -7,7 +7,7 @@ Read-only lending market scanner for [Torch Market](https://torch.market) on Sol
 ## Install
 
 ```bash
-npm install torch-liquidation-bot
+npm install torch-liquidation-bot@2.0.6 --ignore-scripts
 ```
 
 ## Quick Start
@@ -19,6 +19,8 @@ RPC_URL=<rpc> npx torch-liquidation-bot
 # show lending info for a specific token
 MINT=<mint> RPC_URL=<rpc> npx torch-liquidation-bot
 ```
+
+> `npx` resolves to the locally-installed copy. If not installed locally, it will fetch from npm — review the [source](https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro) first.
 
 ## What It Does
 
@@ -92,9 +94,12 @@ pnpm test    # read-only test
 - No wallet loaded, no keypair decoded, no private key in memory
 - No transaction building, no signing, no state changes
 - Outbound connections: Solana RPC only
-- Minimal dependencies: `@solana/web3.js` + `torchsdk`
+- Minimal dependencies: `@solana/web3.js` + `torchsdk` — all pinned to exact versions (no `^` or `~` ranges)
 - No post-install hooks, no remote code fetching
 - RPC_URL is used only for read-only RPC calls — never logged, transmitted externally, or stored
+- `disableModelInvocation: true` — agents cannot invoke this skill autonomously
+
+See the full [Supply Chain Verification](clawhub/SKILL.md#supply-chain-verification) and [Threat Model](clawhub/SKILL.md#threat-model) sections in SKILL.md.
 
 ## Links
 
