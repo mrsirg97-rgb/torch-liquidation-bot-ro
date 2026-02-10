@@ -1,4 +1,4 @@
-# torch-liquidation-bot v2.0.6 (Read-Only)
+# torch-liquidation-bot v2.0.7 (Read-Only)
 
 Read-only lending market scanner for [Torch Market](https://torch.market) on Solana. No wallet required. Only an RPC endpoint is needed.
 
