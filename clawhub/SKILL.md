@@ -4,7 +4,7 @@ description: Read-only lending market scanner for Torch Market on Solana. No wal
 license: MIT
 metadata:
   author: torch-market
-  version: "2.0.1"
+  version: "2.0.2"
   clawhub: https://clawhub.ai/mrsirg97-rgb/torchliquidationbot
   npm: https://www.npmjs.com/package/torch-liquidation-bot
   github: https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro
