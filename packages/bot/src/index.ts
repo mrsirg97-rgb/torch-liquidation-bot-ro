@@ -14,12 +14,7 @@
  */
 
 import { Connection } from '@solana/web3.js'
-import {
-  getToken,
-  getTokens,
-  getLendingInfo,
-  type LendingInfo,
-} from 'torchsdk'
+import { getToken, getTokens, getLendingInfo, type LendingInfo } from 'torchsdk'
 import { loadReadOnlyConfig } from './config'
 import { sol, bpsToPercent } from './utils'
 

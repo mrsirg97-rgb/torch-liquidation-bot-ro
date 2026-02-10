@@ -13,12 +13,7 @@
  */
 
 import { Connection, LAMPORTS_PER_SOL } from '@solana/web3.js'
-import {
-  getToken,
-  getTokens,
-  getLendingInfo,
-  type LendingInfo,
-} from 'torchsdk'
+import { getToken, getTokens, getLendingInfo, type LendingInfo } from 'torchsdk'
 
 const RPC_URL = process.env.RPC_URL ?? 'http://localhost:8899'
 
