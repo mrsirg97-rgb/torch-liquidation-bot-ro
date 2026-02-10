@@ -11,7 +11,6 @@ metadata:
   sdk: https://github.com/mrsirg97-rgb/torchsdk
   required_env: RPC_URL
   optional_env: MINT, LOG_LEVEL
-  install: npm install torch-liquidation-bot
 compatibility: Requires Node.js and a Solana RPC endpoint (RPC_URL). Only read-only info mode is available -- no wallet loaded, no signing, no state changes. All wallet-dependent functionality was removed in v2.0.0. Distributed via npm. Source available for audit at the GitHub repository.
 ---
 
@@ -209,7 +208,8 @@ RESULTS: 5 passed, 0 failed
 
 ## Links
 
-- Source Code: [github.com/mrsirg97-rgb/torch-liquidation-bot](https://github.com/mrsirg97-rgb/torch-liquidation-bot)
+- Source Code: [github.com/mrsirg97-rgb/torch-liquidation-bot-ro](https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro)
+- npm: [npmjs.com/package/torch-liquidation-bot](https://www.npmjs.com/package/torch-liquidation-bot)
 - Torch SDK: [github.com/mrsirg97-rgb/torchsdk](https://github.com/mrsirg97-rgb/torchsdk)
 - Torch Market: [torch.market](https://torch.market)
 - ClawHub: [clawhub.ai/mrsirg97-rgb/torchliquidationbot](https://clawhub.ai/mrsirg97-rgb/torchliquidationbot)
