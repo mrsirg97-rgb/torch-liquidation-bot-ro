@@ -1,6 +1,6 @@
 {
   "name": "torch-liquidation-bot",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "read-only lending market scanner for Torch Market on Solana",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
