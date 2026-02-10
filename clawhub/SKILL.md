@@ -4,15 +4,18 @@ description: Read-only lending market scanner for Torch Market on Solana. No wal
 license: MIT
 metadata:
   author: torch-market
-  version: "2.0.2"
+  version: "2.0.3"
   clawhub: https://clawhub.ai/mrsirg97-rgb/torchliquidationbot
   npm: https://www.npmjs.com/package/torch-liquidation-bot
   github: https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro
   sdk: https://github.com/mrsirg97-rgb/torchsdk
-compatibility: Requires a Solana RPC endpoint. Only read-only info mode is available -- no wallet loaded, no signing, no state changes. All wallet-dependent functionality (bot mode, watch mode) was removed in v2.0.0. Distributed via npm.
+  required_env: RPC_URL
+  optional_env: MINT, LOG_LEVEL
+  install: npm install torch-liquidation-bot
+compatibility: Requires Node.js and a Solana RPC endpoint (RPC_URL). Only read-only info mode is available -- no wallet loaded, no signing, no state changes. All wallet-dependent functionality was removed in v2.0.0. Distributed via npm. Source available for audit at the GitHub repository.
 ---
 
-# Torch Liquidation Bot — v2.0.1 (Read-Only)
+# Torch Liquidation Bot — v2.0.2 (Read-Only)
 
 Read-only lending market scanner for [Torch Market](https://torch.market) on Solana. No wallet required. Only an RPC endpoint is needed.
 
@@ -83,6 +86,7 @@ packages/bot/src/
 - **No private key handling** -- `Keypair` is not imported. `bs58` is not a dependency. There is no code that could decode, hold, or transmit a private key.
 - **Distributed via npm** -- all code runs from `node_modules/`. No post-install hooks, no remote code fetching.
 - **Minimal dependencies** -- `@solana/web3.js` and `torchsdk` only.
+- **RPC_URL sensitivity** -- if your RPC provider embeds an API key in the endpoint URL, that key is used only for read-only RPC calls and is never logged, transmitted externally, or stored. Use a read-only key or a public endpoint if this is a concern.
 
 ## Setup
 
@@ -96,7 +100,7 @@ npm install torch-liquidation-bot
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `RPC_URL` | yes | -- | Solana RPC endpoint |
+| `RPC_URL` | yes | -- | Solana RPC endpoint. If your provider embeds an API key in the URL, use a read-only key or a public endpoint. |
 | `MINT` | no | -- | Token mint address. If set, shows info for that token. If omitted, shows all migrated tokens. |
 | `LOG_LEVEL` | no | `info` | `debug`, `info`, `warn`, or `error` |
 
@@ -213,4 +217,4 @@ RESULTS: 5 passed, 0 failed
 
 **NOTE**
 
-A security audit of the v1.x codebase is provided in `audit.md`. That audit covers the wallet-handling and transaction-signing code that has since been removed. v2.0.1 contains only read-only code — the audited wallet code exists only in the git history of the original repository.
+A security audit of the v1.x codebase is provided in `audit.md`. That audit covers the wallet-handling and transaction-signing code that has since been removed. v2.0.2 contains only read-only code — the audited wallet code exists only in the git history of the original repository.

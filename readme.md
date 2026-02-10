@@ -1,4 +1,4 @@
-# torch-liquidation-bot v2.0.1 (Read-Only)
+# torch-liquidation-bot v2.0.3 (Read-Only)
 
 Read-only lending market scanner for [Torch Market](https://torch.market) on Solana. No wallet required. Only an RPC endpoint is needed.
 
@@ -30,7 +30,7 @@ That's it. No wallet loaded. No transactions built. No state changes.
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `RPC_URL` | yes | -- | Solana RPC endpoint |
+| `RPC_URL` | yes | -- | Solana RPC endpoint. If your provider embeds an API key in the URL, use a read-only key or a public endpoint. |
 | `MINT` | no | -- | Token mint address (omit to show all tokens) |
 | `LOG_LEVEL` | no | `info` | `debug`, `info`, `warn`, `error` |
 
@@ -96,6 +96,7 @@ pnpm test    # read-only test
 - Outbound connections: Solana RPC only
 - Minimal dependencies: `@solana/web3.js` + `torchsdk`
 - No post-install hooks, no remote code fetching
+- RPC_URL is used only for read-only RPC calls — never logged, transmitted externally, or stored
 
 ## Links
 
