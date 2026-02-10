@@ -1,10 +1,10 @@
 ---
 name: torch-liquidation-bot
-description: Read-only lending market scanner for Torch Market on Solana. No wallet required. Scans lending markets and displays rates, LTV thresholds, treasury balances, and active loan counts. Requires only an RPC endpoint.
+description: Read-only lending market scanner for Torch Market on Solana. No wallet required. Scans lending markets and displays rates, LTV thresholds, treasury balances, and active loan counts. Requires only an RPC endpoint (RPC_URL). Optional MINT and LOG_LEVEL parameters can be provided to tune scope of the tool.
 license: MIT
 metadata:
   author: torch-market
-  version: "2.0.4"
+  version: "2.0.5"
   clawhub: https://clawhub.ai/mrsirg97-rgb/torchliquidationbot
   npm: https://www.npmjs.com/package/torch-liquidation-bot
   github: https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro
@@ -15,7 +15,7 @@ metadata:
 compatibility: Requires Node.js and a Solana RPC endpoint (RPC_URL). Only read-only info mode is available -- no wallet loaded, no signing, no state changes. All wallet-dependent functionality was removed in v2.0.0. Distributed via npm. Source available for audit at the GitHub repository.
 ---
 
-# Torch Liquidation Bot — v2.0.4 (Read-Only)
+# Torch Liquidation Bot — v2.0.5 (Read-Only)
 
 Read-only lending market scanner for [Torch Market](https://torch.market) on Solana. No wallet required. Only an RPC endpoint is needed.
 
@@ -217,4 +217,4 @@ RESULTS: 5 passed, 0 failed
 
 **NOTE**
 
-A security audit of the v1.x codebase is provided in `audit.md`. That audit covers the wallet-handling and transaction-signing code that has since been removed. v2.0.4 contains only read-only code — the audited wallet code exists only in the git history of the original repository.
+A security audit of the v1.x codebase is provided in `audit.md`. That audit covers the wallet-handling and transaction-signing code that has since been removed. v2.0.0+ contains only read-only code — the audited wallet code exists only in the git history of the original repository.

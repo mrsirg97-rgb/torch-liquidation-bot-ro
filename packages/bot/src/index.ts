@@ -34,7 +34,7 @@ async function showLendingInfo(connection: Connection, mint: string) {
   console.log(`liquidation threshold: ${bpsToPercent(lending.liquidation_threshold_bps)}`)
   console.log(`liquidation bonus:     ${bpsToPercent(lending.liquidation_bonus_bps)}`)
   console.log(`treasury SOL avail:    ${sol(lending.treasury_sol_available)} SOL`)
-  console.log(`total SOL lent:        ${sol(lending.total_sol_lent)} SOL`)
+  console.log(`total SOL lent:        ${lending.total_sol_lent ? sol(lending.total_sol_lent) : sol(0)} SOL`)
   console.log(`active loans:          ${lending.active_loans}`)
 }
 
