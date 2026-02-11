@@ -14,9 +14,9 @@ metadata:
         package: torch-liquidation-bot@2.0.8
         flags: ["--ignore-scripts"]
         bins: ["torch-liquidation-bot"]
-        label: "Install torch-liquidation-bot (npm, --ignore-scripts)"
+        label: "Install torch-liquidation-bot (npm, optional -- source is bundled in lib/bot/)"
   author: torch-market
-  version: "2.0.8"
+  version: "2.0.9"
   clawhub: https://clawhub.ai/mrsirg97-rgb/torchliquidationbot
   github: https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro
   npm: https://www.npmjs.com/package/torch-liquidation-bot
@@ -24,10 +24,10 @@ metadata:
   agentkit: https://github.com/mrsirg97-rgb/solana-agent-kit-torch-market
   npm-torchsdk: https://www.npmjs.com/package/torchsdk
   npm-agentkit: https://www.npmjs.com/package/solana-agent-kit-torch-market
-compatibility: Requires Node.js and a Solana RPC endpoint (RPC_URL). Only read-only info mode is available -- no wallet loaded, no signing, no state changes. All wallet-dependent functionality was removed in v2.0.0. Distributed via npm. Source available for audit at the GitHub repository.
+compatibility: Requires Node.js and a Solana RPC endpoint (RPC_URL). Only read-only info mode is available -- no wallet loaded, no signing, no state changes. All wallet-dependent functionality was removed in v2.0.0. The bot source is bundled in lib/bot/ -- all code is included in this skill package for full auditability. No npm install needed. Also available via npm and GitHub.
 ---
 
-# Torch Liquidation Bot — v2.0.8 (Read-Only)
+# Torch Liquidation Bot — v2.0.9 (Read-Only)
 
 Read-only lending market scanner for [Torch Market](https://torch.market) on Solana. No wallet required. Only an RPC endpoint is needed.
 
@@ -89,16 +89,16 @@ packages/bot/src/
 └── index.ts    — read-only entry point
 ```
 
-4 files. ~60 lines of source. No wallet code.
+4 files. ~60 lines of source. No wallet code. The full source is bundled in `lib/bot/` for on-disk auditability -- you can verify every claim in this document by reading those 4 files directly.
 
-The codebase can be audited and reviewed on GitHub at [torch-liquidation-bot-ro](https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro).
+Also available on GitHub at [torch-liquidation-bot-ro](https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro).
 
 ## Network & Permissions
 
 - **Read-only only** -- no wallet is loaded, no keypair is decoded, no signing occurs, no state changes. Only `RPC_URL` is required.
 - **Outbound connections:** Solana RPC (via `@solana/web3.js`) only. No SAID Protocol API calls, no write endpoints.
 - **No private key handling** -- `Keypair` is not imported. `bs58` is not a dependency. There is no code that could decode, hold, or transmit a private key.
-- **Distributed via npm** -- all code runs from `node_modules/`. No post-install hooks, no remote code fetching. Install locally with `npm install torch-liquidation-bot@2.0.8 --ignore-scripts` and audit the source before running.
+- **Source bundled in skill** -- the bot source is included in `lib/bot/` for full auditability. No npm install needed for core functionality. Also available via npm: `npm install torch-liquidation-bot@2.0.8 --ignore-scripts`.
 - **Minimal dependencies** -- `@solana/web3.js` and `torchsdk` only. All dependency versions are pinned to exact versions (no `^` or `~` ranges) in `package.json` to prevent supply chain drift.
 - **RPC_URL sensitivity** -- if your RPC provider embeds an API key in the endpoint URL, that key is used only for read-only RPC calls and is never logged, transmitted externally, or stored. Use a read-only key or a public endpoint if this is a concern.
 - **Autonomous invocation disabled** -- `disable-model-invocation: true` is set as a top-level frontmatter field (OpenClaw extension), ensuring the registry enforces it. An agent cannot invoke this skill autonomously — it requires explicit user action. This is a deliberate choice: because the skill depends on npm-distributed code, autonomous execution should not be permitted by default.
@@ -161,7 +161,9 @@ Expected: only `@solana/web3.js` and `torchsdk` as direct dependencies.
 
 ### Install
 
-Review the source code on GitHub at [torch-liquidation-bot-ro](https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro) before installing.
+The bot source is bundled in `lib/bot/` — no npm install needed for core functionality. You can audit the 4 JS files directly.
+
+Alternatively, install via npm:
 
 ```bash
 npm install torch-liquidation-bot@2.0.8 --ignore-scripts
@@ -312,6 +314,7 @@ What a **compromised dependency** could theoretically do:
 - Only 2 direct dependencies (`@solana/web3.js`, `torchsdk`) — both are auditable
 - All dependency versions are locked to exact versions in `package.json` (no `^` or `~` ranges) — prevents supply chain drift from semver-range resolution
 - `--ignore-scripts` installation prevents lifecycle script execution
+- Bot source bundled in `lib/bot/` for on-disk auditability -- no blind npm dependency
 - Version pinning in install command (`@2.0.8`) prevents silent upgrades
 - `disable-model-invocation: true` (top-level frontmatter) prevents autonomous agent execution
 - Source is public and auditable on GitHub
@@ -319,7 +322,8 @@ What a **compromised dependency** could theoretically do:
 
 ## Links
 
-- Source Code: [github.com/mrsirg97-rgb/torch-liquidation-bot-ro](https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro)
+- Source (bundled): `lib/bot/` -- **included in this skill, start here**
+- Source (GitHub): [github.com/mrsirg97-rgb/torch-liquidation-bot-ro](https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro)
 - npm: [npmjs.com/package/torch-liquidation-bot](https://www.npmjs.com/package/torch-liquidation-bot)
 - Torch SDK: [github.com/mrsirg97-rgb/torchsdk](https://github.com/mrsirg97-rgb/torchsdk)
 - Torch Market: [torch.market](https://torch.market)
