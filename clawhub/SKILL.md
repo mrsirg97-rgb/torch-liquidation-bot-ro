@@ -16,7 +16,7 @@ metadata:
         bins: ["torch-liquidation-bot"]
         label: "Install torch-liquidation-bot (npm, optional -- source is bundled in lib/bot/)"
   author: torch-market
-  version: "2.1.0"
+  version: "2.1.1"
   clawhub: https://clawhub.ai/mrsirg97-rgb/torchliquidationbot
   github: https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro
   npm: https://www.npmjs.com/package/torch-liquidation-bot
@@ -24,7 +24,7 @@ metadata:
   agentkit: https://github.com/mrsirg97-rgb/solana-agent-kit-torch-market
   npm-torchsdk: https://www.npmjs.com/package/torchsdk
   npm-agentkit: https://www.npmjs.com/package/solana-agent-kit-torch-market
-compatibility: Requires Node.js, @solana/web3.js (npm), and a Solana RPC endpoint (RPC_URL). Only read-only info mode is available -- no wallet loaded, no signing, no state changes. All wallet-dependent functionality was removed in v2.0.0. The bot source is bundled in lib/bot/ and the Torch SDK (v2.0.0) is bundled in lib/torchsdk/ -- both are included in this skill package for full auditability. The only external npm dependency is @solana/web3.js. Also available via npm and GitHub.
+compatibility: Requires Node.js, @solana/web3.js (npm), and a Solana RPC endpoint (RPC_URL). Only read-only info mode is available -- no wallet loaded, no signing, no state changes. All wallet-dependent functionality was removed in v2.0.0. The bot source is bundled in lib/bot/ and torchsdk (v2.0.0) is bundled in lib/torchsdk/, stripped to just the methods utilized by lib/bot/. The only external npm dependency is @solana/web3.js. Also available via npm and GitHub.
 ---
 
 # Torch Liquidation Bot — v2.1.0 (Read-Only)
@@ -89,7 +89,7 @@ packages/bot/src/
 └── index.ts    — read-only entry point
 ```
 
-4 files. ~60 lines of source. No wallet code. The full bot source is bundled in `lib/bot/` and its dependency, the Torch SDK (v2.0.0), is bundled in `lib/torchsdk/`. You can verify every claim in this document by reading these files directly.
+4 files. ~60 lines of source. No wallet code. The bot source is bundled in `lib/bot/` and torchsdk (v2.0.0) is bundled in `lib/torchsdk/`, stripped to just the methods utilized by `lib/bot/`.
 
 Also available on GitHub at [torch-liquidation-bot-ro](https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro).
 
@@ -98,15 +98,15 @@ Also available on GitHub at [torch-liquidation-bot-ro](https://github.com/mrsirg
 - **Read-only only** -- no wallet is loaded, no keypair is decoded, no signing occurs, no state changes. Only `RPC_URL` is required.
 - **Outbound connections:** Solana RPC (via `@solana/web3.js`) only. No SAID Protocol API calls, no write endpoints.
 - **No private key handling** -- `Keypair` is not imported. `bs58` is not a dependency. There is no code that could decode, hold, or transmit a private key.
-- **Source bundled in skill** -- the bot source is included in `lib/bot/` and the Torch SDK (v2.0.0) is included in `lib/torchsdk/` for full auditability. The only external npm dependency is `@solana/web3.js`. Also available via npm: `npm install torch-liquidation-bot@2.0.8 --ignore-scripts`.
-- **Minimal external dependencies** -- `@solana/web3.js` is the only npm dependency. `torchsdk` is bundled locally and makes no network calls beyond Solana RPC -- you can verify this by reading `lib/torchsdk/`.
+- **Source bundled in skill** -- bot source in `lib/bot/`, torchsdk (v2.0.0) in `lib/torchsdk/` stripped to just the methods utilized by `lib/bot/`. The only external npm dependency is `@solana/web3.js`. Also available via npm: `npm install torch-liquidation-bot@2.0.8 --ignore-scripts`.
+- **Minimal external dependencies** -- `@solana/web3.js` is the only npm dependency. The bundled torchsdk contains only the read-only query functions and PDA derivation helpers used by the bot.
 - **RPC_URL sensitivity** -- if your RPC provider embeds an API key in the endpoint URL, that key is used only for read-only RPC calls and is never logged, transmitted externally, or stored. Use a read-only key or a public endpoint if this is a concern.
 - **Autonomous invocation disabled** -- `disable-model-invocation: true` is set as a top-level frontmatter field (OpenClaw extension), ensuring the registry enforces it. An agent cannot invoke this skill autonomously — it requires explicit user action. This is a deliberate choice: because the skill depends on npm-distributed code, autonomous execution should not be permitted by default.
 - **Required env declared via OpenClaw** -- `RPC_URL` is declared in `metadata.openclaw.requires.env`, which the registry uses to validate environment before invocation. Optional variables (`MINT`, `LOG_LEVEL`) have no frontmatter equivalent and are documented in the Environment Variables table below.
 
 ## Supply Chain Verification
 
-The bot source and Torch SDK are bundled in this skill package (`lib/bot/` and `lib/torchsdk/`). You can audit them directly. The only external dependency is `@solana/web3.js`.
+The bot source (`lib/bot/`) and torchsdk (`lib/torchsdk/`, stripped to utilized methods) are bundled in this skill package. You can audit them directly. The only external dependency is `@solana/web3.js`.
 
 If you prefer to use the npm distribution instead, verify the package yourself:
 
@@ -147,7 +147,7 @@ diff -r package/dist/ <(cd /path/to/torch-liquidation-bot-ro && pnpm build && ec
 grep -rn "Keypair\|bs58\|sendAndConfirm\|signTransaction\|secretKey\|privateKey" lib/bot/ lib/torchsdk/
 ```
 
-Expected: no matches in `lib/bot/`. The `lib/torchsdk/` files contain transaction-building code (used by the full SDK), but the bot only imports read-only functions (`getTokens`, `getToken`, `getLendingInfo`).
+Expected: no matches. The bundled torchsdk has been stripped to just the methods utilized by `lib/bot/` -- no transaction builders, no signing code.
 
 ---
 
@@ -155,7 +155,7 @@ Expected: no matches in `lib/bot/`. The `lib/torchsdk/` files contain transactio
 
 ### Install
 
-The bot source is bundled in `lib/bot/` and the Torch SDK (v2.0.0) in `lib/torchsdk/`. The only npm dependency required is `@solana/web3.js`.
+The bot source is bundled in `lib/bot/` and torchsdk (v2.0.0) in `lib/torchsdk/`, stripped to just the utilized methods. The only npm dependency required is `@solana/web3.js`.
 
 Alternatively, install everything via npm:
 
@@ -305,7 +305,7 @@ What a **compromised dependency** could theoretically do:
 
 **Mitigations in place:**
 
-- Bot source bundled in `lib/bot/`, Torch SDK (v2.0.0) bundled in `lib/torchsdk/` -- both auditable on-disk
+- Bot source in `lib/bot/`, torchsdk (v2.0.0) in `lib/torchsdk/` stripped to just the utilized methods -- both auditable on-disk
 - Only 1 external npm dependency (`@solana/web3.js`) -- well-known, widely audited, maintained by Solana Labs
 - `--ignore-scripts` installation prevents lifecycle script execution
 - Version pinning in install command (`@2.0.8`) prevents silent upgrades
@@ -315,8 +315,8 @@ What a **compromised dependency** could theoretically do:
 
 ## Links
 
-- Bot source (bundled): `lib/bot/` -- **included in this skill, start here**
-- Torch SDK v2.0.0 (bundled): `lib/torchsdk/` -- **included in this skill**
+- Bot source (bundled): `lib/bot/` -- **start here**
+- torchsdk v2.0.0 (bundled): `lib/torchsdk/` -- **stripped to utilized methods**
 - Source (GitHub): [github.com/mrsirg97-rgb/torch-liquidation-bot-ro](https://github.com/mrsirg97-rgb/torch-liquidation-bot-ro)
 - npm: [npmjs.com/package/torch-liquidation-bot](https://www.npmjs.com/package/torch-liquidation-bot)
 - Torch SDK (GitHub): [github.com/mrsirg97-rgb/torchsdk](https://github.com/mrsirg97-rgb/torchsdk)
